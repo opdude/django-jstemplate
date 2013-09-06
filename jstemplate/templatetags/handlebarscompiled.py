@@ -9,7 +9,7 @@ register = template.Library()
 
 
 
-class HandlebarsJSNode(BaseJSTemplateNode):
+class HandlebarsJSCompiledNode(BaseJSTemplateNode):
     def generate_node_text(self, resolved_name, file_content):
         output = (
             '<script type="text/javascript" id="{name}">'
@@ -42,7 +42,7 @@ class HandlebarsJSNode(BaseJSTemplateNode):
 
 
 @register.tag
-def handlebarsjs(parser, token):
+def handlebarscompiledjs(parser, token):
     """
     Finds the Handlebars template for the given name and renders it surrounded
     by the requisite Handlebars <script> tags.
@@ -51,5 +51,5 @@ def handlebarsjs(parser, token):
     additional parameter denoting whether to register partials inline.
 
     """
-    return jstemplate_tag_helper('handlebarsjs', HandlebarsJSNode,
+    return jstemplate_tag_helper('handlebarsjscompiled', HandlebarsJSCompiledNode,
                                  parser, token)
